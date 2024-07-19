@@ -1,4 +1,4 @@
-const User = require("./../model/User.model");
+const User = require("../model/User.model");
 const jwt = require("jsonwebtoken");
 const { promisify } = require("util");
 
@@ -96,3 +96,29 @@ exports.authenticate = async (req, res, next) => {
     res.json(err);
   }
 };
+
+exports.adminLevel = (req, res, next) => {
+  if (!req.user) {
+    return res.status(401).json({ message: "Unauthorized" });
+  }
+  if (req.user.role !== 'admin') {
+    return res.status(403).json({ 
+      message: "Admin access required" 
+    });
+  }
+  next();
+};
+
+exports.moderatorLevel = (req, res, next) => {
+  if (!req.user) {
+    return res.status(401).json({ message: "Unauthorized" });
+  }
+  if (req.user.role !== 'moderator' && req.user.role !== 'admin') {
+    return res.status(403).json({ 
+      message: "Moderator or Admin access required" 
+    });
+  }
+  next();
+};
+
+

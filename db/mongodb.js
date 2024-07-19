@@ -2,7 +2,7 @@
 const mongoose = require('mongoose');
 
 //import config file
-const CONFIG = require("./../config/config");
+const CONFIG = require("../config/config");
 
 //database connection function
 function connectToDB(){
