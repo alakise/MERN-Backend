@@ -76,8 +76,9 @@ For a complete list and details of all endpoints, please refer to the Swagger do
    Create a `.env` file in the root directory and add the following:
    ```
    PORT=3000
-   MONGODB_URI=your_mongodb_connection_string
+   MONGODB_URL=your_mongodb_connection_string
    JWT_SECRET=your_jwt_secret
+   JWT_EXPIRES_IN= 90
    ```
 
 4. Start the server:

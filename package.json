@@ -1,5 +1,6 @@
 {
   "name": "fundamental-backend",
+  "description": "Express.js based API for user authentication, profile management, and role management",
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
