@@ -1,6 +1,6 @@
 openapi: 3.0.0
 info:
-  title: User Management API
+  title: Fundamental Express API
   description: API for user authentication, profile management, and role management
   version: 1.0.0
 
