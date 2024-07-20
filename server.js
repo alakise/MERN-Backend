@@ -2,7 +2,7 @@
 const app = require('./app');
 
 //import config module
-const CONFIG = require('./config/config');
+require('dotenv').config();
 
 //import database connection function
 const connectToDB = require('./db/mongodb');
@@ -33,7 +33,7 @@ const options = {
         },
         servers: [
             {
-                url: `http://localhost:${CONFIG.PORT}`,
+                url: `http://localhost:${process.env.PORT}`,
             },
         ],
     },
@@ -46,6 +46,6 @@ app.use(
     swaggerUi.setup(swaggerDocument, { explorer: true }),
     
   );
-app.listen(CONFIG.PORT, () => {
-    console.log(`Server is running on http://localhost:${CONFIG.PORT}`)
+app.listen(process.env.PORT, () => {
+    console.log(`Server is running on http://localhost:${process.env.PORT}`)
 })

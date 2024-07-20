@@ -1,12 +1,10 @@
 //import mongoose 
 const mongoose = require('mongoose');
-
-//import config file
-const CONFIG = require("../config/config");
+require('dotenv').config();
 
 //database connection function
 function connectToDB(){
-    mongoose.connect(CONFIG.MONGODB_URL);
+    mongoose.connect(process.env.MONGODB_URL);
 
     //Add event listener to test connection
     mongoose.connection.on('connected', () => {

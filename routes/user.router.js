@@ -13,6 +13,7 @@ const router = express.Router();
  // API endpoint for signup and login
 router.post("/auth/signup", authController.signup);
 router.post("/auth/login", authController.login);
+router.post("/auth/google", authController.googleLogin);
 
 // Update user info (user itself)
 router.patch(
@@ -40,5 +41,7 @@ router.patch(
   authController.moderatorLevel,
   userController.changeUserRole,
 );
+
+
 
 module.exports = router;

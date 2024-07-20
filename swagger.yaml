@@ -3,7 +3,6 @@ info:
   title: Fundamental Express API
   description: API for user authentication, profile management, and role management
   version: 1.0.0
-
 paths:
   /auth/signup:
     post:
@@ -37,7 +36,14 @@ paths:
           description: User created successfully
         '400':
           description: Bad request
-
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "Email already exists. Please use a different email or try logging in."
   /auth/login:
     post:
       summary: Log in a user
@@ -62,9 +68,68 @@ paths:
       responses:
         '200':
           description: Login successful
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "This user uses Google Authentication. Please sign in with Google."
         '401':
           description: Unauthorized
-
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "Incorrect password"
+  /auth/google:
+    post:
+      summary: Authenticate or register a user with Google
+      tags:
+        - Authentication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - token
+                - clientId
+              properties:
+                token:
+                  type: string
+                clientId:
+                  type: string
+      responses:
+        '200':
+          description: Google authentication successful
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "This email is already associated with a non-Google account. Please log in with your email and password."
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "Invalid Google credentials"
   /user/update:
     patch:
       summary: Update user information
@@ -93,7 +158,6 @@ paths:
           description: Unauthorized
         '400':
           description: Bad request
-
   /user/delete/{id}:
     delete:
       summary: Delete a user
@@ -116,7 +180,6 @@ paths:
           description: Forbidden
         '404':
           description: User not found
-
   /user/change-role:
     patch:
       summary: Change user role
@@ -150,7 +213,6 @@ paths:
           description: User not found
         '400':
           description: Bad request
-
 components:
   securitySchemes:
     BearerAuth:
